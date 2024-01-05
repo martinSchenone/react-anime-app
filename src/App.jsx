@@ -86,7 +86,7 @@ function App() {
                   ref={sectionRef}
                   className="flex flex-wrap max-w-7xl mx-auto flex-col md:flex-row min-h-screen items-start"
                 >
-                  <div className="flex-[2]">
+                  <div className="flex-[2] mx-auto">
                     <AnimeHome
                       page={page}
                       prevPage={prevPage}

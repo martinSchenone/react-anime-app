@@ -57,8 +57,7 @@ export const SearchComp = () => {
   };
   useEffect(() => {
     getSearch();
-    window.scrollTo(0, 0);
-    // getAnime(anime);
+    // window.scrollTo(0, 0);
     return () => {
       setAnimeList("");
       setLoading(false);
@@ -70,14 +69,14 @@ export const SearchComp = () => {
       {hasError && <Error error={hasError} />}
 
       <section ref={sectionRef} className="p-5 min-h-screen">
-        <div className="text-2xl font-semibold mt-10 flex justify-between">
+        <div className="text-2xl font-semibold mt-10 flex justify-between flex-col gap-5 items-center md:items-center md:flex-row">
           <h1>
             Results for:{" "}
             <span className="uppercase">
               {anime.length > 30 ? `${anime.substring(0, 30)}...` : anime}
             </span>
           </h1>
-          <span>{page}</span>
+          <span className="btn btn-circle text-2xl font-bold">{page}</span>
         </div>
 
         <div
@@ -109,11 +108,17 @@ export const SearchComp = () => {
             </>
           )}
         </div>
-        <div className="join grid grid-cols-2 pt-10 gap-2">
-          <button className="join-item btn " onClick={prevPage}>
+        <div className="join items-center grid grid-cols-2 py-10 gap-2  max-w-xl  mx-auto ">
+          <button
+            className="join-item btn text-2xl font-bold "
+            onClick={prevPage}
+          >
             Previous page
           </button>
-          <button className="join-item btn " onClick={nextPage}>
+          <button
+            className="join-item btn text-2xl font-bold  "
+            onClick={nextPage}
+          >
             Next
           </button>
         </div>

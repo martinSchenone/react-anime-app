@@ -34,7 +34,6 @@ export const AnimeHome = ({
       console.error(error);
     }
   };
-  console.log(animeList);
   return (
     <>
       <section className=" w-full p-2">
