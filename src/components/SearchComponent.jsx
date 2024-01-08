@@ -17,7 +17,7 @@ export const SearchComponent = () => {
         <input
           placeholder="Search..."
           type="text"
-          className="peer relative input input-bordered    w-full text-gray-950  focus:placeholder:translate-y-8 focus:placeholder:transition-all"
+          className="peer text-white relative input input-bordered    w-full text-gray-950  focus:placeholder:translate-y-8 focus:placeholder:transition-all"
           onChange={handleInput}
           required
         ></input>

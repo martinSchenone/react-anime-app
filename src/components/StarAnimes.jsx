@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { db } from "../db/firebase";
 import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { FavAnimeCard } from "./FavAnimeCard";
+import { Loading } from "./Loading";
 export const StarAnimes = () => {
   const [favAnimes, setFavAnimes] = useState([]);
   const [load, setIsLoad] = useState(true);
   const [isDeleted, setIsDeleted] = useState(false);
-
+  const [error, setError] = useState(null)
   // referencia de la DB
   const favAnimesCollection = collection(db, "favoriteAnimes");
 
@@ -21,7 +22,7 @@ export const StarAnimes = () => {
         setFavAnimes(data);
       }
     } catch (error) {
-      console.error(error);
+      setError(error)
     } finally {
       setIsLoad(false);
     }
@@ -45,19 +46,12 @@ export const StarAnimes = () => {
   }, []);
   return (
     <>
-      <div className="mt-20 min-h-screen max-w-6xl mx-auto  rounded w-full p-4 shadow-2xl my-5 relative">
+      <div className="mt-20 min-h-screen max-w-6xl mx-auto  rounded w-full p-4 shadow-2xl bg-sky-950 my-5 relative">
+        {load && <Loading />}
         <div
-          style={{ gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))" }}
+          style={{ gridTemplateColumns: "repeat(auto-fill,minmax(250px,1fr))" }}
           className="grid gap-10"
         >
-          {load && (
-            <>
-              <div className="flex gap-10 items-center justify-center">
-                <span className="animate-spin w-6 h-6 text-white bg-white"></span>
-                <h1 className="text-3xl">Loading animes...</h1>
-              </div>
-            </>
-          )}
           {isDeleted && (
             <>
               <div className="toast z-10 toast-middle toast-center">
@@ -66,11 +60,6 @@ export const StarAnimes = () => {
                 </div>
               </div>
             </>
-          )}
-          {favAnimes.length == 0 && (
-            <h1 className="my-52 text-center text-2xl font-semibold max-w-sm justify-self-center">
-              There are no animes saved in favorites yet
-            </h1>
           )}
           {favAnimes &&
             favAnimes.map((anime) => (
@@ -81,6 +70,13 @@ export const StarAnimes = () => {
               />
             ))}
         </div>
+        {favAnimes.length == 0 && (
+            <div className="flex justify-center items-center w-full border border-gray-600 rounded">
+            <h1 className="my-52 p-2 text-center text-3xl font-semibold max-w-md justify-self-center w-full  mx-auto">
+              There are no animes saved in favorites yet
+            </h1>
+            </div>
+          )}
       </div>
     </>
   );

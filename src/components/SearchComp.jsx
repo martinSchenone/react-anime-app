@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Loading } from "./Loading";
 import { Error } from "./Error";
 import { getPath } from "../utils/api";
+import { SearchCompCard } from "./SearchCompCard.jsx";
 /*  TERMINAR EL SEARCH COMPONENT */
 export const SearchComp = () => {
   const { anime } = useParams();
@@ -60,14 +61,12 @@ export const SearchComp = () => {
     // window.scrollTo(0, 0);
     return () => {
       setAnimeList("");
-      setLoading(false);
+      setLoading(true);
     };
   }, [anime, page]);
   return (
     <>
-      {loading && <Loading loading={loading} />}
       {hasError && <Error error={hasError} />}
-
       <section ref={sectionRef} className="p-5 min-h-screen">
         <div className="text-2xl font-semibold mt-10 flex justify-between flex-col gap-5 items-center md:items-center md:flex-row">
           <h1>
@@ -76,47 +75,29 @@ export const SearchComp = () => {
               {anime.length > 30 ? `${anime.substring(0, 30)}...` : anime}
             </span>
           </h1>
-          <span className="btn btn-circle text-2xl font-bold">{page}</span>
+          <span className="btn btn-circle text-2xl font-bold text-center text-gray-4000">
+            {page}
+          </span>
         </div>
-
         <div
           className=" pt-10 grid gap-12 min-h-screen"
-          style={{ gridTemplateColumns: "repeat(auto-fill,minmax(250px,1fr))" }}
+          style={{
+            gridTemplateColumns: "repeat(auto-fill,minmax(250px,1fr))",
+          }}
         >
-          {animeList && (
-            <>
-              {animeList.data.map((searchedAnime) => (
-                <div
-                  key={searchedAnime.mal_id}
-                  className="flex flex-col gap-10  items-center justify-between border-gray-600 border-2 rounded-xl   overflow-hidden "
-                >
-                  <div className="h-full w-full hover:scale-105 transition-all cursor-pointer ">
-                    <img
-                      src={searchedAnime.images.webp.large_image_url}
-                      className="h-full w-full max-h-80 object-cover"
-                    />
-                  </div>
-                  <div className="pb-5">
-                    <h1 className="text-xl font-bold text-center">
-                      {searchedAnime.title.length > 25
-                        ? `${searchedAnime.title.substring(0, 20)}...`
-                        : searchedAnime.title}
-                    </h1>
-                  </div>
-                </div>
-              ))}
-            </>
-          )}
+          {loading && <Loading />}
+          {animeList && <SearchCompCard animeList={animeList} />}
         </div>
+
         <div className="join items-center grid grid-cols-2 py-10 gap-2  max-w-xl  mx-auto ">
           <button
-            className="join-item btn text-2xl font-bold "
+            className="join-item btn lg:text-2xl font-bold text-white"
             onClick={prevPage}
           >
             Previous page
           </button>
           <button
-            className="join-item btn text-2xl font-bold  "
+            className="join-item btn lg:text-2xl font-bold  text-white"
             onClick={nextPage}
           >
             Next
