@@ -79,7 +79,7 @@ function App() {
                   />
                   <section
                     ref={sectionRef}
-                    className="flex flex-wrap max-w-7xl mx-auto flex-col md:flex-row min-h-screen items-start min-h-screen"
+                    className="flex flex-wrap max-w-7xl mx-auto flex-col md:flex-row min-h-screen items-start"
                   >
                     <div className="flex-[2] mx-auto">
                       <AnimeHome

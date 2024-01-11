@@ -9,7 +9,7 @@ export const SearchCompCard = ({ animeList }) => {
           <div className="h-full w-full hover:scale-105 transition-all cursor-pointer ">
             <img
               src={searchedAnime.images.webp.large_image_url}
-              className="h-full w-full max-h-80 object-cover"
+              className=" w-full h-96 object-cover"
             />
           </div>
           <div className="pb-5">

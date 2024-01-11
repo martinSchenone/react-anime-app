@@ -4,7 +4,7 @@ export const AnimeListCard = ({ anime, addFavAnime }) => {
   return (
     <div
       key={anime.mal_id}
-      className="relative  flex flex-col justify-between  gap-2 "
+      className="relative  flex flex-col justify-between  gap-2 border px-2 pb-5 pt-1  border-gray-700"
     >
       <a
         href={anime.url}
@@ -22,7 +22,11 @@ export const AnimeListCard = ({ anime, addFavAnime }) => {
           />
         </div>
         <div className="font-semibold">
-          <h1>{anime.title.substring(0, 50)}...</h1>
+          <h1>
+            {anime.title.length > 25
+              ? `${anime.title.substring(0, 25)}...`
+              : anime.title}
+          </h1>
         </div>
       </a>
       <button

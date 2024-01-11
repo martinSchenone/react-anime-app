@@ -3,8 +3,8 @@ import star from "../assets/star.svg";
 export const FavAnimeCard = ({ anime, deleteFavAnime }) => {
   return (
     <div className="flex flex-col  items-center text-center  gap-5 text-xl font-bold rounded bg-[#818FB4] text-black relative ">
-      <div className=" ">
-        <img src={anime?.images?.webp.large_image_url} className="h-96 object-cover" />
+      <div className="w-full rounded-t-sm">
+        <img src={anime?.images?.webp.large_image_url} className="h-96 object-cover w-full rounded-t-sm" />
       </div>
       <div className="px-2 pb-10">
         <h1>{anime.title.length > 25 ? `${anime.title.substring(0,25)}...`:anime.title}</h1>

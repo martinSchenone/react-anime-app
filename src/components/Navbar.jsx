@@ -1,7 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { SearchComponent } from "./SearchComponent";
-import { Suspense } from "react";
-import {Loading} from './Loading'
 export const Layout = () => {
   return (
     <>
@@ -9,7 +7,7 @@ export const Layout = () => {
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col bg-slate-900">
           {/* Navbar */}
-          <div className="w-full navbar bg-[#b3c7f7]">
+          <div className="w-full navbar bg-[#b3c7f7] text-slate-800">
             <div className="flex-none lg:hidden">
               <label
                 htmlFor="my-drawer-3"
@@ -32,17 +30,34 @@ export const Layout = () => {
               </label>
             </div>
             <div className="flex-1 px-2 mx-2 text-2xl font-bold -tracking-tight">
-              <h1>ANIMEX</h1>
+              <NavLink to={"/"}>
+                <h1 className="hover:scale-105 transition-all">ANIMEX</h1>
+              </NavLink>
             </div>
             <div className="flex-none hidden lg:block">
               <ul className="menu menu-horizontal items-center gap-10 text-xl">
                 {/* Navbar menu content here */}
-                <NavLink to={"/"} className={"cursor-pointer transition-all "}>
+                <NavLink
+                  to={"/"}
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                      ? " text-blue-400 after:flex transition-all after:h-[2px]  after:opacity-100 after:bg-black"
+                      : ""
+                  }
+                >
                   HOME
                 </NavLink>
                 <NavLink
                   to={"/star_animes"}
-                  className={"cursor-pointer transition-all "}
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "  pending"
+                      : isActive
+                      ? " text-blue-400 after:flex transition-all after:h-[2px]  after:opacity-100 after:bg-black"
+                      : ""
+                  }
                 >
                   FAVORITES
                 </NavLink>
@@ -50,22 +65,38 @@ export const Layout = () => {
               </ul>
             </div>
           </div>
-            <Outlet />
+          <Outlet />
         </div>
-        <div className="drawer-side  z-10">
+        <div className="drawer-side  z-10 text-slate-800">
           <label
             htmlFor="my-drawer-3"
             aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-          <ul className="menu p-4 w-[min(250px,80%)] min-h-full bg-sky-900 gap-5 text-xl">
+            className="drawer-overlay "
+          >
+          </label>
+          <ul className="menu p-4 w-[min(250px,80%)] min-h-full bg-[#b3c7f8] gap-5 text-xl">
             {/* Sidebar content here */}
-            <NavLink to={"/"} className={"cursor-pointer transition-all "}>
+            <NavLink
+              to={"/"}
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "  pending"
+                  : isActive
+                  ? " text-blue-400 after:flex transition-all after:h-[2px]  after:opacity-100 after:bg-black"
+                  : ""
+              }
+            >
               HOME
             </NavLink>
             <NavLink
               to={"/star_animes"}
-              className={"cursor-pointer transition-all "}
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "  pending"
+                  : isActive
+                  ? " text-blue-400 after:flex transition-all after:h-[2px] after:opacity-100 after:bg-black"
+                  : ""
+              }
             >
               FAVORITES
             </NavLink>
